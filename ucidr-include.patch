@@ -1,0 +1,35 @@
+diff -ur ucidr-1.1/makefile ucidr-1.1.new/makefile
+--- ucidr-1.1/makefile	2009-05-08 21:51:25.000000000 +0200
++++ ucidr-1.1.new/makefile	2009-06-12 15:39:12.529675852 +0200
+@@ -15,6 +15,8 @@
+ #
+ 
+ CFLAGS= -Wall
++libdir = @libdir@
++includedir = @includedir@
+ 
+ all: libucidr.a
+ 
+@@ -25,7 +27,7 @@
+ 	cc -c ucidr.c -o ucidr.o $(CFLAGS)
+ 
+ example: example.o
+-	cc example.o -o example /usr/lib/openisp/libucidr.a
++	cc example.o -o example $(DESTDIR)$(includedir)/openisp/libucidr.a
+ 	rm -f example.o
+ 
+ example.o: example.c ucidr.h
+@@ -35,8 +37,8 @@
+ 	rm -f *.o *.a example
+ 
+ install: libucidr.a ucidr.h
+-	mkdir -p /usr/lib/openisp
+-	mkdir -p /usr/include/openisp
+-	install libucidr.a /usr/lib/openisp/libucidr.a
+-	install ucidr.h /usr/include/openisp/ucidr.h
++	mkdir -p $(DESTDIR)$(libdir)/openisp
++	mkdir -p $(DESTDIR)$(includedir)/openisp
++	install libucidr.a $(DESTDIR)$(libdir)/openisp/libucidr.a
++	install ucidr.h $(DESTDIR)$(includedir)/openisp/ucidr.h
+ 	rm libucidr.a
+Tylko w ucidr-1.1.new/: makefile~
