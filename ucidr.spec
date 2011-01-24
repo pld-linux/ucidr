@@ -1,3 +1,6 @@
+# TODO:
+# - fix makefile to use CC and *FLAGS
+# - fix desc - it's just a library, not a program
 Summary:	A small static library for IPv4 CIDR operations
 Name:		ucidr
 Version:	1.1
@@ -8,6 +11,7 @@ Source0:	http://unixservice.com/source/libs/%{name}-%{version}.tar.gz
 # Source0-md5:	7f19628e97ec2d212bc66cbd7b3f4fdc
 Patch0:		%{name}-include.patch
 URL:		http://openisp.net/ucidr
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The ucidr program provides functions for determining if a given IPv4
@@ -32,7 +36,6 @@ uInCIDR4Format(const char *cCIDR4,unsigned *uIPv4,unsigned
 %{__make}
 
 %install
-
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
